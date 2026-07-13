@@ -59,7 +59,7 @@
   .card .name{font-weight:600; font-size:calc(var(--card-w, 190px) * 0.1); text-align:center; line-height:1.25; color:var(--ink); width:100%;
     display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
   .card .role{font-weight:500; font-size:calc(var(--card-w, 190px) * 0.072); text-align:center; line-height:1.2; color:#8a7f6d; width:100%;
-    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
   @keyframes enter{
     from{opacity:0; transform:translateY(14px) scale(.96);}
     to{opacity:1; transform:translateY(0) scale(1);}
@@ -180,7 +180,7 @@ async function poll(){
 
 const MIN_CARD_W = 130;
 const MAX_CARD_W = 340;
-const CARD_ASPECT = 1.42;
+const CARD_ASPECT = 1.55;
 const GRID_GAP = 18;
 
 function computeCardWidth(n, containerW, containerH){
