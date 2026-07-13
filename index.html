@@ -55,8 +55,11 @@
   }
   .card.new{border-color:var(--orange); border-width:2px;}
   .card svg{background:#fff; border-radius:8px; padding:6px; width:100%; height:auto; box-sizing:border-box; display:block;}
+  .card .info{width:100%; display:flex; flex-direction:column; gap:3px;}
   .card .name{font-weight:600; font-size:calc(var(--card-w, 190px) * 0.1); text-align:center; line-height:1.25; color:var(--ink); width:100%;
     display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
+  .card .role{font-weight:500; font-size:calc(var(--card-w, 190px) * 0.072); text-align:center; line-height:1.2; color:#8a7f6d; width:100%;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
   @keyframes enter{
     from{opacity:0; transform:translateY(14px) scale(.96);}
     to{opacity:1; transform:translateY(0) scale(1);}
@@ -148,17 +151,20 @@ async function poll(){
 
     const nameIdx = findCol(cols, ['name']);
     const linkedinIdx = findCol(cols, ['linkedin']);
+    const roleIdx = findCol(cols, ['what do you do', 'role', 'title', 'job', 'description']);
     if (nameIdx === -1 || linkedinIdx === -1) return;
 
     const fresh = [];
     rows.forEach((row, i) => {
       const nameCell = row.c[nameIdx];
       const liCell = row.c[linkedinIdx];
+      const roleCell = roleIdx === -1 ? null : row.c[roleIdx];
       const name = nameCell && nameCell.v ? String(nameCell.v).trim() : '';
       const linkedin = normalizeLinkedInUrl(liCell && liCell.v ? String(liCell.v) : '');
+      const role = roleCell && roleCell.v ? String(roleCell.v).trim() : '';
       if (!name || !linkedin) return;
       const key = i + '|' + name + '|' + linkedin;
-      fresh.push({ key, name, linkedin });
+      fresh.push({ key, name, linkedin, role });
     });
 
     const newOnes = fresh.filter(e => !seenKeys.has(e.key));
@@ -174,7 +180,7 @@ async function poll(){
 
 const MIN_CARD_W = 130;
 const MAX_CARD_W = 340;
-const CARD_ASPECT = 1.3;
+const CARD_ASPECT = 1.42;
 const GRID_GAP = 18;
 
 function computeCardWidth(n, containerW, containerH){
@@ -213,7 +219,8 @@ function render(newKeys){
   pageItems.forEach(e => {
     const card = document.createElement('div');
     card.className = 'card' + (newKeys.includes(e.key) ? ' new' : '');
-    card.innerHTML = svgQr(e.linkedin, 4) + `<div class="name">${escapeHtml(e.name)}</div>`;
+    const roleHtml = e.role ? `<div class="role">${escapeHtml(e.role)}</div>` : '';
+    card.innerHTML = svgQr(e.linkedin, 4) + `<div class="info"><div class="name">${escapeHtml(e.name)}</div>${roleHtml}</div>`;
     grid.appendChild(card);
   });
 
