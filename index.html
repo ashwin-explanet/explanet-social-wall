@@ -44,6 +44,10 @@
   .counter{padding-top:24px; border-top:2px solid var(--border); width:100%;}
   .counter .num{font-size:2.8rem; font-weight:700; color:var(--green); line-height:1;}
   .counter .lbl{color:var(--muted); font-size:.95rem; margin-top:4px;}
+  .socials{display:flex; align-items:center; justify-content:center; gap:8px; margin-top:14px;}
+  .social-link{display:flex; color:var(--muted);}
+  .social-link svg{width:16px; height:16px; display:block;}
+  .social-handle{color:var(--muted); font-size:.8rem;}
   .wall{padding:28px 32px; overflow:hidden; position:relative; display:flex; flex-direction:column; height:100vh; background:var(--ink);}
   .wall-header{display:flex; align-items:baseline; justify-content:flex-end; margin-bottom:20px; flex:0 0 auto;}
   .wall-header .page-dots{display:flex; gap:6px;}
@@ -95,6 +99,21 @@
     <div class="counter">
       <div class="num" id="countNum">0</div>
       <div class="lbl">People on the wall</div>
+      <div class="socials">
+        <a class="social-link" href="https://instagram.com/explanethouse" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+        <a class="social-link" href="https://x.com/explanethouse" target="_blank" rel="noopener" aria-label="X">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.9 2.4h3.4l-7.4 8.5 8.7 11.7h-6.8l-5.3-7-6.1 7H2l7.9-9L1.5 2.4h7l4.8 6.4zm-1.2 18.1h1.9L7 4.4H4.9z"/>
+          </svg>
+        </a>
+        <span class="social-handle">@explanethouse</span>
+      </div>
     </div>
   </div>
   <div class="wall">
